@@ -30,13 +30,21 @@ dist/node-jquery.js: dist src/header.js build/dist/jquery.js src/footer.js
 dist/node-jquery.min.js: dist/node-jquery.js
 	uglifyjs dist/node-jquery.js > dist/node-jquery.min.js
 
+dist/package.json: dist/node-jquery.js
+	cp package.node.json dist/package.json
+
 clean:
 	rm -rf build dist
 
+package: dist/package.json
+	cd dist; npm pack ./
+
+install: dist/package.json
+	npm install --force ./dist
+
 npm:
 	rm -rf dist/*.min.js
-	cp package.ender.json dist/package.json; cd dist; npm publish --force ./
-#	cp package.node.json dist/package.json; cd dist; npm publish --force ./
+	cp package.node.json dist/package.json; cd dist; npm publish --force ./
 
 
 test: dist/node-jquery.js deps/nodeunit deps/jsdom

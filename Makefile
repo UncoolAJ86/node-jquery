@@ -40,7 +40,7 @@ package: dist/package.json
 	cd dist; npm pack ./
 
 install: dist/package.json
-	npm install --force ./dist
+	npm uninstall jquery ; npm install ./dist
 
 npm:
 	rm -rf dist/*.min.js

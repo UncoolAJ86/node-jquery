@@ -10,6 +10,12 @@ Node.JS
 
     var $ = require('jQuery');
 
+To build it yourself:
+
+    git clone https://github.com/linuxwolf/node-jquery
+    cd node-query
+    make && make install
+
 
 Examples
 ---

@@ -4,6 +4,8 @@
   , "url": "http://jquery.com"
   , "keywords": ["util", "dom", "jquery"]
   , "author": "John Resig <jeresig@gmail.com>"
+  , "main": "./build/dist/node-jquery.js"
+  , "version": "1.7.2"
   , "contributors": []
   , "dependencies": {
         "jsdom": ">=0.2.0"
@@ -14,7 +16,8 @@
   , "devDependencies": {
         "nodeunit"  : ">=0.7"
     }
-  , "lib"           : "."
-  , "main"          : "./node-jquery.js"
-  , "version"       : "{VERSION}"
+  , "scripts": {
+        "preinstall": "make dist"
+      , "test": "node node_modules/nodeunit/bin/nodeunit test/"
+  }
 }

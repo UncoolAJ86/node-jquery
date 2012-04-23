@@ -17,18 +17,15 @@ $(foreach dep,$(SUBMODULES),$(eval $(call depend,$(dep))))
 
 build/dist/jquery.js: deps/jquery
 	mkdir -p build
-	make -C deps/jquery PREFIX=../../build jquery min
+	make -C deps/jquery PREFIX=../../build jquery
 
-wrapper: dist/node-jquery.js dist/node-jquery.min.js
+wrapper: dist/node-jquery.js
 
 dist:
 	mkdir -p dist
 
 dist/node-jquery.js: dist src/header.js build/dist/jquery.js src/footer.js
 	cat src/header.js build/dist/jquery.js src/footer.js > dist/node-jquery.js
-
-dist/node-jquery.min.js: dist/node-jquery.js
-	uglifyjs dist/node-jquery.js > dist/node-jquery.min.js
 
 dist/package.json: dist/node-jquery.js
 	cp package.node.json dist/package.json
@@ -42,12 +39,12 @@ package: dist/package.json
 install: dist/package.json
 	npm uninstall jquery ; npm install ./dist
 
-npm:
-	rm -rf dist/*.min.js
+npm: dist/node-jquery.js dist/package.json
 	cp package.node.json dist/package.json; cd dist; npm publish --force ./
 
 
-test: dist/node-jquery.js deps/nodeunit deps/jsdom
-	$(NODEJS) deps/nodeunit/bin/nodeunit test/
+test: dist/node-jquery.js dist/package.json
+	cd dist ; npm install && npm install -d
+	$(NODEJS) dist/node_modules/nodeunit/bin/nodeunit test/
 
 .PHONY: all wrapper clean test npm

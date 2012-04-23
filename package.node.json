@@ -14,4 +14,7 @@
   , "lib"           : "."
   , "main"          : "./node-jquery.js"
   , "version"       : "1.7.2"
+  , "devDependencies": {
+        "nodeunit"  : ">=0.7"
+  }
 }

@@ -1,17 +1,12 @@
 VERSION = 1.7.2
 NODEJS = $(if $(shell test -f /usr/bin/nodejs && echo "true"),nodejs,node)
 
-define depend
-$(1):
-	git submodule update --init --recursive $(1)
-endef
-
-all: init build/dist/node-jquery.js build/dist/package.json
+all: build/dist/node-jquery.js build/dist/package.json
 
 deps/jquery/.git:
 	git submodule update --init --recursive
 
-build/dist/jquery.js: deps/jquery
+build/dist/jquery.js: deps/jquery/.git
 	mkdir -p build
 	make -C deps/jquery PREFIX=../../build jquery
 
@@ -33,7 +28,7 @@ package: build/dist/node-jquery.js build/dist/package.json
 install: build/dist/node-jquery.js build/dist/package.json
 	npm install ./build/dist
 
-npm: build/dist/node-jquery.js build/dist/package.json
+publish: build/dist/node-jquery.js build/dist/package.json
 	npm publish --force build/dist/.
 
 test:	build/dist/node-jquery.js \
@@ -50,7 +45,4 @@ clean:
 
 dist: clean all package
 
-distclean: clean
-	rm -rf node_modules package.json
-
-.PHONY: all dist clean distclean test npm init
+.PHONY: all clean dist install package publish test

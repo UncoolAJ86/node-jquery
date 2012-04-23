@@ -16,7 +16,7 @@ var query_ids = function() {
 var recreate_doc = function(html) {
 	document = require('jsdom').jsdom(html);
 	window = document.createWindow();
-	$ = jQuery = require(process.cwd() + '/dist/node-jquery').create(window, true);
+	$ = jQuery = require(process.cwd() + '/node-jquery').create(window, true);
 }
 
 exports.query_ids = query_ids;

@@ -11,10 +11,10 @@
       , "location": ">=0.0.1"
       , "xmlhttprequest": ">=1.3.0"
     }
-  , "lib"           : "."
-  , "main"          : "./node-jquery.js"
-  , "version"       : "1.7.2"
   , "devDependencies": {
         "nodeunit"  : ">=0.7"
-  }
+    }
+  , "lib"           : "."
+  , "main"          : "./node-jquery.js"
+  , "version"       : "{VERSION}"
 }

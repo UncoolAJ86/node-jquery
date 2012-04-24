@@ -4,7 +4,7 @@
   , "url": "http://jquery.com"
   , "keywords": ["util", "dom", "jquery"]
   , "author": "John Resig <jeresig@gmail.com>"
-  , "main": "./build/dist/node-jquery.js"
+  , "main": "./dist/node-jquery.js"
   , "version": "1.7.2"
   , "contributors": []
   , "dependencies": {

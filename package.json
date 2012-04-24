@@ -17,7 +17,7 @@
         "nodeunit"  : ">=0.7"
     }
   , "scripts": {
-        "preinstall": "make dist"
+        "preinstall": "node ./build.js"
       , "test": "node node_modules/nodeunit/bin/nodeunit test/"
   }
 }

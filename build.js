@@ -1,28 +1,49 @@
 var fs = require("fs"),
-    path = require("path");
+    path = require("path"),
+    http = require("http");
 
-console.log("reading sources...");
-var content = [
-    fs.readFileSync("src/header.js"),
-    fs.readFileSync("deps/jquery.js"),
-    fs.readFileSync("src/footer.js")
-];
-
-
+var location = "http://code.jquery.com/jquery-1.7.2.js";
 var distDir = path.join(process.cwd(), "dist");
 
-var distPart = [];
-while (!path.existsSync(distDir)) {
-    distPart.unshift(path.basename(distDir));
-    distDir = path.dirname(distDir);
-}
+var data = {};
+var onDone = function() {
+    if (!data["header"] || !data["main"] || !data["footer"]) {
+        return;
+    }
 
-while (distPart.length) {
-    distDir = path.join(distDir, distPart.shift());
-    console.log("creating directory %s...", distDir);
-    fs.mkdirSync(distDir);
-}
+    var distPart = [];
+    while (!path.existsSync(distDir)) {
+        distPart.unshift(path.basename(distDir));
+        distDir = path.dirname(distDir);
+    }
+    
+    while (distPart.length) {
+        distDir = path.join(distDir, distPart.shift());
+        console.log("creating directory %s...", distDir);
+        fs.mkdirSync(distDir);
+    }
+    
+    var distFile = path.join(distDir, "node-jquery.js");
+    var output = fs.createWriteStream(distFile);
+    console.log("writing file %s", distFile);
+    output.write(data["header"]);
+    output.write(data["main"]);
+    output.write(data["footer"]);
+    output.end();
+};
+var monitor = function(name, src) {
+    var buffer = "";
+    src.on("data", function(d) { buffer += d; });
+    src.on("end", function() { data[name] = buffer; onDone(); });
+};
 
-var distFile = path.join(distDir, "node-jquery.js");
-console.log("writing file %s", distFile);
-fs.writeFileSync(distFile, content.join(""));
+console.log("getting main contents via %s...", location);
+http.get(require("url").parse(location), function(res) {
+    monitor("main", res);
+}).on("error", function(err) {
+    throw err;
+});
+
+console.log("reading local sources...");
+monitor("header", fs.createReadStream("src/header.js"));
+monitor("footer", fs.createReadStream("src/footer.js"));

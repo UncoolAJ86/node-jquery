@@ -18,6 +18,8 @@
     }
   , "scripts": {
         "preinstall": "node ./build.js"
+      , "prepublish": "node ./build.js"
       , "test": "node node_modules/nodeunit/bin/nodeunit test/"
+      , "clean": "rm -rf dist"
   }
 }

@@ -2,8 +2,12 @@ var fs = require("fs"),
     path = require("path"),
     http = require("http");
 
-var location = "http://code.jquery.com/jquery-1.7.2.js";
+var location = "http://code.jquery.com/jquery-" + process.env.npm_package_version + ".js";
 var distDir = path.join(process.cwd(), "dist");
+var distFile = path.join(distDir, "node-jquery.js");
+if (path.existsSync(distFile)) {
+    process.exit(0);
+}
 
 var data = {};
 var onDone = function() {
@@ -23,7 +27,6 @@ var onDone = function() {
         fs.mkdirSync(distDir);
     }
     
-    var distFile = path.join(distDir, "node-jquery.js");
     var output = fs.createWriteStream(distFile);
     console.log("writing file %s", distFile);
     output.write(data["header"]);

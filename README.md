@@ -1,27 +1,31 @@
 node-jQuery
 ====
 
-A stupid-simple wrapper over jQuery for Node.JS (server). Currently 1.7.2.
+A stupid-simple wrapper over jQuery for Node.JS. Currently for jQuery version 1.7.2.
 
-Node.JS
+Installing
 ---
+    npm install git://github.com/linuxwolf/node-jquery
 
-    npm install jQuery jsdom htmlparser xmlhttprequest
+NOTE: This version is not published!
 
-    var $ = require('jQuery');
-
-To build it yourself:
+Building and Testing
+---
 
     git clone https://github.com/linuxwolf/node-jquery
     cd node-query
-    make && make install
-
+    npm install -d
+    npm test
 
 Examples
 ---
 
     $("<h1>test passes</h1>").appendTo("body");
     console.log($("body").html());
+
+Output:
+
+    <h1>test passes</h1>
 
 You may also create separate window instances
 

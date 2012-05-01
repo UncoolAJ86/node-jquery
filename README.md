@@ -49,3 +49,7 @@ Output:
     <h1>test passes</h1>
     <h2>other test passes</h2>
     <h3>third test passes</h3>
+<<<<<<< HEAD
+=======
+
+>>>>>>> updated todos

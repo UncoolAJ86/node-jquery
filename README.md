@@ -1,20 +1,12 @@
 node-jQuery
 ====
 
-A stupid-simple wrapper over jQuery for Ender.JS (browser) and Node.JS (server). Currently 1.6.4.
+A stupid-simple wrapper over jQuery for  Node.JS (server). Currently 1.7.2.
 
-Ender.JS
+Node.JS
 ---
 
-NOTE: This version is not published!
-
-Building and Testing
----
-
-    git clone https://github.com/linuxwolf/node-jquery
-    cd node-query
-    npm install -d
-    npm test
+    npm install jQuery
 
 Examples
 ---

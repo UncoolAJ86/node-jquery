@@ -8,17 +8,16 @@ Node.JS
 
     npm install jQuery
 
+    var $ = require('jQuery');
+
+
 Examples
 ---
 
     $("<h1>test passes</h1>").appendTo("body");
     console.log($("body").html());
 
-Output:
-
-    <h1>test passes</h1>
-
-You may also create separate window instances
+In Node.JS you may also create separate window instances
 
     var jsdom = require('jsdom').jsdom
       , myWindow = jsdom().createWindow()
@@ -41,8 +40,6 @@ Output:
     <h1>test passes</h1>
     <h2>other test passes</h2>
     <h3>third test passes</h3>
-<<<<<<< HEAD
-=======
 
 JSONP Example
 ----

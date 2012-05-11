@@ -4,7 +4,7 @@ function create(window) {
     window = require('jsdom').jsdom().createWindow();
     
     // jsdom includes incomplete version of XHR
-    window.XMLHttpRequest('xmlhtprequest').XMLHttpRequest;
+    window.XMLHttpRequest = XMLHttpRequest('xmlhtprequest').XMLHttpRequest;
     // trick jQuery into CORS support
     window.XMLHttpRequest.prototype.withCredentials = false;
   }

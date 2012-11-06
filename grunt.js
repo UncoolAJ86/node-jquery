@@ -6,7 +6,7 @@ module.exports = function(grunt) {
       host = 'ajax.googleapis.com',
       jqPath = '/ajax/libs/jquery/1.7.2/jquery.js';
 
-  grunt.registerTask('build', 'builds query module for us in nodje', function() {
+  grunt.registerTask('build', 'builds jquery module for use in node', function() {
     var tmpDir = './tmp', distDir = './lib',
         done = this.async(), wrapper;
 

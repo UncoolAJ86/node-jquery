@@ -1,5 +1,5 @@
 module.exports = function(grunt) {
-  
+
   var exec = require('child_process').exec,
       http = require('http'),
       fs = require('fs'),
@@ -22,13 +22,13 @@ module.exports = function(grunt) {
       var data = '',
           req = http.request({
         host: host,
-        port: 80, 
+        port: 80,
         path: jqPath,
         method: 'GET'
       }, function(res) {
-        res.setEncoding('utf8');  
+        res.setEncoding('utf8');
         res.on('data', function(chunk) {
-          data += chunk;  
+          data += chunk;
         });
         res.on('end', function() {
           fs.writeFileSync(tmpDir+'/jquery.js', data);
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
     function getjQuery() {
       var jq = null;
       try {
-        jq = fs.readFileSync(tmpDir+'/jquery.js', 'utf8');  
+        jq = fs.readFileSync(tmpDir+'/jquery.js', 'utf8');
         buildjQuery(jq);
       } catch (e) {
         writejQuery();
